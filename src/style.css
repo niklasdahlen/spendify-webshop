@@ -97,3 +97,52 @@ body {
   color: #111;
   font-weight: 700;
 }
+
+
+/* ===== PRODUCT VIEW ====== */
+
+body .card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 0px;
+  padding: 1rem;
+  color: #cccccc;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  
+}
+
+body.product-view {
+  background-color: var(--bg-card);
+  padding: 1rem;
+  color: var(--gold);
+}
+.card-text.text-danger {
+  color: var(--gold);
+}
+.card-brand {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.card-text{
+  color: var(--text-muted);
+  height: 70px;
+  overflow: hidden;
+}
+
+.card-title {
+  color: var(--gold-dark);
+  text-align: left;
+  height: 60px;
+  overflow: hidden;
+  font-size: large;
+}
+
+/* ===== FOOTER ====== */
+.footer {
+  background-color: rgba(20, 22, 26, 0.97);
