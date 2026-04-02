@@ -99,7 +99,7 @@ body {
 }
 
 
-/* ===== PRODUCT VIEW ====== */
+
 
 body .card {
   background-color: var(--bg-card);
@@ -143,6 +143,8 @@ body.product-view {
   font-size: large;
 }
 
-/* ===== FOOTER ====== */
+
 .footer {
   background-color: rgba(20, 22, 26, 0.97);
+
+}

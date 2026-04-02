@@ -63,24 +63,43 @@
 
         data.products.forEach((product) => {
 
-          console.log(product);
+
           output += `
-                          <div class="col mb-4">
-                                <div class="card" style="width: 18rem;">
-                                <img src="${product.images[0]}" class="card-img-top" alt="${product.title}">
-                                 <div class="card-body">
-                                     ${product.brand ? `<h5 class="card-brand">${product.brand}</h5>` : ""}
-                                     <h1 class="card-title"> ${product.title}</h2>
-                                     <p class="card-text">${product.description}</p>
-                                     <p class="card-text text-danger"> Price: ${product.price}</p>
-                                     <a href="#" class="filter-btn">Buy</a>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col mb-4">
+              <div class="card" style="width: 18rem;">
+               <img src="${product.images[0]}" class="card-img-top" alt="${product.title}">
+                <div class="card-body">
+                 ${product.brand ? `<h5 class="card-brand">${product.brand}</h5>` : ""}
+                 <h1 class="card-title"> ${product.title}</h1>
+                 <p class="card-text">${product.description}</p>
+                 <p class="card-text text-danger"> Price: ${product.price}</p>
+                 <a href="#" class="filter-btn buy-btn"
+                  data-title="${product.title}"
+                  data-price="${product.price}"
+                  data-img="${product.images[0]}">Buy</a>
+              </div>
+            </div>
+          </div>
                         
-                        `;
+        `;
         });
+
         item.innerHTML = output;
+      
+        document.querySelectorAll(".buy-btn").forEach(btn => {
+          btn.addEventListener("click", function(e) {
+            e.preventDefault();
+            document.getElementById("previewImg").src = this.dataset.img;
+            document.getElementById("previewImg").alt = this.dataset.title;
+            document.getElementById("previewTitle").textContent = this.dataset.title;
+            document.getElementById("previewPrice").textContent = "Price: $" + this.dataset.price;
+            document.getElementById("modalProductPreview").classList.remove("d-none");
+            document.getElementById("orderForm").classList.remove("d-none");
+            document.getElementById("confirmBox").classList.add("d-none");
+            selectedProduct = { title: this.dataset.title, price: this.dataset.price };
+            bsOrderModal.show();
+          });
+        });
       }
 
 
@@ -95,11 +114,77 @@
 
   </div>
 
+  <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content order-modal-content">
+ 
+        <div class="modal-header">
+          <h5 class="modal-title section-title" id="orderModalLabel">Place your order</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+ 
+          <div id="modalProductPreview" class="modal-product-preview d-none mb-3">
+            <img id="previewImg" src="" alt="" />
+            <div>
+              <p id="previewTitle" class="preview-title"></p>
+              <p id="previewPrice" class="preview-price"></p>
+            </div>
+          </div>
+
+          <form id="orderForm" novalidate>
+ 
+            <fieldset class="order-fieldset mb-3">
+              <legend>Personal details</legend>
+              <div class="field-group">
+                <label for="fName">Name *</label>
+                <input type="text" id="fName" placeholder="Anna Andersson" maxlength="50" />
+                <span class="error" id="errName"></span>
+              </div>
+              <div class="field-group">
+                <label for="fEmail">Email *</label>
+                <input type="email" id="fEmail" placeholder="anna@example.com" maxlength="50" />
+                <span class="error" id="errEmail"></span>
+              </div>
+              <div class="field-group">
+                <label for="fPhone">Phone *</label>
+                <input type="tel" id="fPhone" placeholder="070-123 45 67" maxlength="20" />
+                <span class="error" id="errPhone"></span>
+              </div>
+            </fieldset>
+ 
+            <fieldset class="order-fieldset mb-3">
+              <legend>Delivery address</legend>
+              <div class="field-group">
+                <label for="fStreet">Street address *</label>
+                <input type="text" id="fStreet" placeholder="Storgatan 1" maxlength="50" />
+                <span class="error" id="errStreet"></span>
+              </div>
+              <div class="field-row">
+                <div class="field-group">
+                  <label for="fZip">Postcode *</label>
+                  <input type="text" id="fZip" placeholder="12345" maxlength="5" />
+                  <span class="error" id="errZip"></span>
+                </div>
+                <div class="field-group">
+                  <label for="fCity">City *</label>
+                  <input type="text" id="fCity" placeholder="Stockholm" maxlength="20" />
+                  <span class="error" id="errCity"></span>
+                </div>
+              </div>
+            </fieldset>
+ 
+            <button type="submit" class="btn-submit w-100">Place order</button>
+          </form>
+
   <footer>
     <div class="footer-content text-center">
-      <p>&copy; 2026 Spendify. All rights reserved.</p>
+      <p class="small text" > &copy; 2026 Spendify. All rights reserved.</p>
     </div>
     
   </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
 </body>
