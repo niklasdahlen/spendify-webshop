@@ -68,6 +68,7 @@
             <div class="col mb-4">
               <div class="card" style="width: 18rem;">
                <img src="${product.images[0]}" class="card-img-top" alt="${product.title}">
+
                 <div class="card-body">
                  ${product.brand ? `<h5 class="card-brand">${product.brand}</h5>` : ""}
                  <h1 class="card-title"> ${product.title}</h1>
@@ -139,12 +140,13 @@
               <legend>Personal details</legend>
               <div class="field-group">
                 <label for="fName">Name *</label>
-                <input type="text" id="fName" placeholder="Anna Andersson" maxlength="50" />
+                <input type="text" id="fName" placeholder="Niklas Niklasson" maxlength="50" />
+
                 <span class="error" id="errName"></span>
               </div>
               <div class="field-group">
                 <label for="fEmail">Email *</label>
-                <input type="email" id="fEmail" placeholder="anna@example.com" maxlength="50" />
+                <input type="email" id="fEmail" placeholder="niklas@example.com" maxlength="50" />
                 <span class="error" id="errEmail"></span>
               </div>
               <div class="field-group">
@@ -158,7 +160,7 @@
               <legend>Delivery address</legend>
               <div class="field-group">
                 <label for="fStreet">Street address *</label>
-                <input type="text" id="fStreet" placeholder="Storgatan 1" maxlength="50" />
+                <input type="text" id="fStreet" placeholder="Gatugatan 1" maxlength="50" />
                 <span class="error" id="errStreet"></span>
               </div>
               <div class="field-row">
@@ -178,13 +180,26 @@
             <button type="submit" class="btn-submit w-100">Place order</button>
           </form>
 
+          <div id="confirmBox" class="confirm-box text-center d-none">
+            <div class="confirm-check mx-auto mb-3">✓</div>
+            <h3>Order received!</h3>
+            <p id="confirmText"></p>
+            <button class="btn-submit w-100" id="confirmClose">Back to shop</button>
+          </div>
+ 
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <div class="footer-content text-center">
       <p class="small text" > &copy; 2026 Spendify. All rights reserved.</p>
     </div>
-    
   </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="script.js"></script>
+
 </body>
+</html>
