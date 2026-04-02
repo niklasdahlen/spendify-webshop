@@ -50,9 +50,12 @@
 
       // Function to load items from the API
       function loadItems() {
-        fetch('https://dummyjson.com/products')
+        fetch('https://dummyjson.com/products?limit=100')
           .then(responce => responce.json())
-          .then(jsonData => renderItems(jsonData))
+          .then(jsonData => { jsonData.products = jsonData.products.filter(p =>
+            p.category === 'fragrances' || p.category === 'beauty'); 
+            renderItems(jsonData);
+          })
           .catch(error => console.error("Error loading items:", error));
       }
 

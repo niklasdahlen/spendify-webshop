@@ -14,8 +14,7 @@ html { scroll-behavior: smooth; }
  
 body {
   font-family: 'DM Sans', sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text);
+  background-color: #111111; color: var(--text);
   min-height: 100vh;
 }
  
@@ -145,9 +144,16 @@ body.product-view {
 
 
 footer {
-  background-color: rgba(20, 22, 26, 0.97);
+  background-color: #111111;
   border-top: 1px solid var(--border);
   padding: 20px 0;
+  text-align: center;
+}
+
+footer p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin: 0;
 }
 
 .order-modal-content {
