@@ -39,85 +39,15 @@
     </div>
   </section>
 
-  <div class="container">
-
-    <script>
-
-      // Load items when the "Products" link is clicked
-      let loadItemsBtn = document.getElementById("products-link");
-      loadItemsBtn.addEventListener("click", loadItems);
-
-
-      // Function to load items from the API
-      function loadItems() {
-        fetch('https://dummyjson.com/products?limit=100')
-          .then(responce => responce.json())
-          .then(jsonData => { jsonData.products = jsonData.products.filter(p =>
-            p.category === 'fragrances' || p.category === 'beauty'); 
-            renderItems(jsonData);
-          })
-          .catch(error => console.error("Error loading items:", error));
-      }
-
-      // Function to render items in the DOM
-      function renderItems(data) {
-        let output = '';
-        let item = document.getElementById("items-container");
-
-        data.products.forEach((product) => {
-
-
-          output += `
-            <div class="col mb-4">
-              <div class="card" style="width: 18rem;">
-               <img src="${product.images[0]}" class="card-img-top" alt="${product.title}">
-
-                <div class="card-body">
-                 ${product.brand ? `<h5 class="card-brand">${product.brand}</h5>` : ""}
-                 <h1 class="card-title"> ${product.title}</h1>
-                 <p class="card-text">${product.description}</p>
-                 <p class="card-text text-danger"> Price: ${product.price}</p>
-                 <a href="#" class="filter-btn buy-btn"
-                  data-title="${product.title}"
-                  data-price="${product.price}"
-                  data-img="${product.images[0]}">Buy</a>
-              </div>
-            </div>
-          </div>
-                        
-        `;
-        });
-
-        item.innerHTML = output;
-      
-        document.querySelectorAll(".buy-btn").forEach(btn => {
-          btn.addEventListener("click", function(e) {
-            e.preventDefault();
-            document.getElementById("previewImg").src = this.dataset.img;
-            document.getElementById("previewImg").alt = this.dataset.title;
-            document.getElementById("previewTitle").textContent = this.dataset.title;
-            document.getElementById("previewPrice").textContent = "Price: $" + this.dataset.price;
-            document.getElementById("modalProductPreview").classList.remove("d-none");
-            document.getElementById("orderForm").classList.remove("d-none");
-            document.getElementById("confirmBox").classList.add("d-none");
-            selectedProduct = { title: this.dataset.title, price: this.dataset.price };
-            bsOrderModal.show();
-          });
-        });
-      }
-
-
-    </script>
-
-      
+  <div class="container">  
     <div class="product-view">
       <div class="container text-left">
-        <div id="items-container" class="row row-cols-4" />
+        <div id="items-container" class="row" />
       </div>
     </div>
 
   </div>
-
+ 
   <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content order-modal-content">
