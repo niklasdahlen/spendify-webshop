@@ -5,30 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
   bsOrderModal = new bootstrap.Modal(document.getElementById("orderModal"));
 });
 
-// Load items when the "Products" link is clicked
 let loadItemsBtn = document.getElementById("products-link");
 loadItemsBtn.addEventListener("click", loadItems);
 
-
-// Function to load items from the API
 function loadItems() {
   fetch('https://dummyjson.com/products?limit=100')
     .then(responce => responce.json())
-    .then(jsonData => {
-      jsonData.products = jsonData.products.filter(p =>
-        p.category === 'fragrances' || p.category === 'beauty');
-      renderItems(jsonData);
-    })
+    .then(jsonData => renderItems(jsonData.products.filter(p => p.category === 'fragrances' || p.category === 'beauty')))
     .catch(error => console.error("Error loading items:", error));
 }
 
-// Function to render items in the DOM
-function renderItems(data) {
+function renderItems(products) {
   let output = '';
   let item = document.getElementById("items-container");
 
-  data.products.forEach((product) => {
-
+  products.forEach((product) => {
 
     output += `
             <div class="col">
@@ -52,8 +43,7 @@ function renderItems(data) {
   });
 
   item.innerHTML = output;
-
-  //
+  
   document.querySelectorAll(".buy-btn").forEach(btn => {
     btn.addEventListener("click", function (e) {
       e.preventDefault();
@@ -64,15 +54,17 @@ function renderItems(data) {
       document.getElementById("modalProductPreview").classList.remove("d-none");
       document.getElementById("orderForm").classList.remove("d-none");
       document.getElementById("confirmBox").classList.add("d-none");
-      selectedProduct = { title: this.dataset.title, price: this.dataset.price };
+      selectedProduct = { 
+        title: this.dataset.title,
+        price: this.dataset.price 
+      };
+      localStorage.setItem("product", JSON.stringify(selectedProduct));
+
       bsOrderModal.show();
     });
   });
 }
 
-
-
-// Close modal / reset
 document.getElementById("orderModal").addEventListener("hidden.bs.modal", () => {
   clearForm();
   document.getElementById("confirmBox").classList.add("d-none");
@@ -81,18 +73,9 @@ document.getElementById("orderModal").addEventListener("hidden.bs.modal", () => 
   selectedProduct = null;
 });
 
-// Confirm button closes modal
 document.getElementById("confirmClose").addEventListener("click", () => {
   bsOrderModal.hide();
 });
-
-/* a. Namnet är minst 2 tecken och max 50 tecken - klar
-b. E-postadressen måste innehålla @ och max 50 tecken
-c. Telefonnummer får innehålla siffror, bindestreck och parenteser. Max 20 tecken.
-d. Leveransadress enligt svensk standard:
-i. Gatuadress: Min 2 tecken och Max 50 tecken
-ii. Postnummer: Exakt 5 siffror
-iii. Ort: Min 2 tecken och Max 20 tecken */
 
 function setFieldState(input, errorEl, message) {
   if (message) {
