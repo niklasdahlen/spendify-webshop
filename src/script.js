@@ -40,7 +40,7 @@ function renderItems(data) {
                  <h1 class="card-title"> ${product.title}</h1>
                  <p class="card-text">${product.description}</p>
                  <p class="card-text text-danger"> Price: ${product.price}</p>
-                 <a href="#" class="filter-btn buy-btn"
+                 <a href="#" class="btn-buy buy-btn"
                   data-title="${product.title}"
                   data-price="${product.price}"
                   data-img="${product.images[0]}">Buy</a>
