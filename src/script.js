@@ -121,8 +121,9 @@ function validateEmail() {
   const inp = document.getElementById("fEmail");
   const val = inp.value.trim();
   const err = document.getElementById("errEmail");
-  if (val.length > 50) return setFieldState(inp, err, "Max 50 characters.");
+  if (!val.length)        return setFieldState(inp, err, "Email is required.");
   if (!val.includes("@")) return setFieldState(inp, err, "Must contain @.");
+  if (val.length > 50)    return setFieldState(inp, err, "Max 50 characters.");
   return setFieldState(inp, err, "");
 }
 
@@ -131,7 +132,7 @@ function validatePhone() {
   const val = inp.value.trim();
   const err = document.getElementById("errPhone");
   if (val.length > 20) return setFieldState(inp, err, "Max 20 characters.");
-  if (!/^[\d\s\-()]*$/.test(val)) return setFieldState(inp, err, "Only numbers, spaces, - and ().");
+  if (!/^[\d\s\-()]+$/.test(val)) return setFieldState(inp, err, "Only numbers, spaces, - and ().");
   return setFieldState(inp, err, "");
 }
 
@@ -172,9 +173,7 @@ document.getElementById("fCity").addEventListener("blur", validateCity);
 document.getElementById("orderForm").addEventListener("submit", e => {
   e.preventDefault();
 
-  //add isValid methods from validation
-
-  const isValid = validateName() && validatePhone() && validateStreet() && validateZip() && validateCity();
+const isValid = validateName() & validateEmail() & validatePhone() & validateStreet() & validateZip() & validateCity();
 
   if (!isValid) {
     document.getElementById("orderForm")
