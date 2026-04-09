@@ -17,14 +17,13 @@ body {
   background-color: #111111; color: var(--text);
   min-height: 100vh;
 }
- 
 
 .navbar {
   background-color: rgba(20, 22, 26, 0.97);
   border-bottom: 1px solid var(--border);
   backdrop-filter: blur(10px);
 }
- 
+
 .navbar .nav-link {
   color: var(--text-muted);
   font-size: 0.85rem;
@@ -37,7 +36,6 @@ body {
  
 .navbar-toggler { border-color: var(--border); }
  
-
 .site-logo {
   font-family: "Monoton", sans-serif;
   font-weight: 400;
@@ -46,7 +44,6 @@ body {
   text-decoration: none;
 }
  
-
 .hero-section {
   background: #111111;
   border-bottom: 1px solid #222;
@@ -471,6 +468,55 @@ input.valid {
   border-top: 1px solid var(--border);
   font-weight: 700;
   color: var(--gold);
+}
+
+.history-order {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.history-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.history-date {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+.history-total {
+  font-family: Garamond, serif;
+  color: var(--gold);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.history-address {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+.history-items-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.history-items-list li {
+  font-size: 0.8rem;
+  color: var(--text);
+  padding: 3px 0;
+  display: flex;
+  gap: 6px;
+}
+.history-qty {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+.history-item-sum {
+  margin-left: auto;
+  color: var(--gold-dark);
+  font-family: Garamond, serif;
+  font-size: 0.82rem;
 }
 
 @media (max-width: 576px) {

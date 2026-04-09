@@ -1,5 +1,6 @@
 let selectedProduct = null;
 let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+let orderHistory = JSON.parse(localStorage.getItem("orderHistory") || "[]");
 let bsOrderModal;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -197,6 +198,69 @@ document.getElementById("confirmClose").addEventListener("click", () => {
   bsOrderModal.hide();
 });
 
+function saveHistory() {
+  localStorage.setItem("orderHistory", JSON.stringify(orderHistory));
+}
+ 
+function addOrder(name, email, street, zip, city, items, total) {
+  orderHistory.unshift({
+    id: Date.now(),
+    date: new Date().toLocaleString("sv-SE"),
+    name,
+    email,
+    address: `${street}, ${zip} ${city}`,
+    items: items.map(i => ({ title: i.title, qty: i.qty, price: i.price })),
+    total
+  });
+  saveHistory();
+}
+ 
+function clearHistory() {
+  orderHistory = [];
+  saveHistory();
+  renderHistory();
+}
+ 
+function renderHistory() {
+  const container = document.getElementById("historyItems");
+  const footer = document.getElementById("historyFooter");
+ 
+  if (orderHistory.length === 0) {
+    container.innerHTML = '<p class="cart-empty-msg">No orders yet.</p>';
+    footer.classList.add("d-none");
+    return;
+  }
+ 
+  container.innerHTML = orderHistory.map(order => `
+    <div class="history-order">
+      <div class="history-order-header">
+        <span class="history-date">${order.date}</span>
+        <span class="history-total">$${order.total.toFixed(2)}</span>
+      </div>
+      <p class="history-address">${order.name} — ${order.address}</p>
+      <ul class="history-items-list">
+        ${order.items.map(i => `<li>${i.title} <span class="history-qty">x${i.qty}</span> <span class="history-item-sum">$${(i.price * i.qty).toFixed(2)}</span></li>`).join("")}
+      </ul>
+    </div>`).join("");
+ 
+  footer.classList.remove("d-none");
+}
+ 
+function openHistory() {
+  renderHistory();
+  document.getElementById("historySidebar").classList.add("open");
+  document.getElementById("historyOverlay").classList.add("open");
+}
+function closeHistory() {
+  document.getElementById("historySidebar").classList.remove("open");
+  document.getElementById("historyOverlay").classList.remove("open");
+}
+ 
+document.getElementById("history-toggle").addEventListener("click", e => { e.preventDefault(); openHistory(); });
+document.getElementById("historyClose").addEventListener("click", closeHistory);
+document.getElementById("historyOverlay").addEventListener("click", closeHistory);
+document.getElementById("historyClear").addEventListener("click", clearHistory);
+
 function setFieldState(input, errorEl, message) {
   if (message) {
     input.classList.add("invalid");
@@ -286,11 +350,15 @@ const isValid = validateName() & validateEmail() & validatePhone() & validateStr
   }
 
   const name = document.getElementById("fName").value.trim();
+  const email = document.getElementById("fEmail").value.trim();
   const street = document.getElementById("fStreet").value.trim();
   const zip = document.getElementById("fZip").value.trim();
   const city = document.getElementById("fCity").value.trim();
   const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
   const itemList = cart.map(i => `${i.title} x${i.qty}`).join(", ");
+
+  addOrder(name, email, street, zip, city, cart, total);
+
 
   document.getElementById("confirmText").innerHTML = `
     Thank you <strong>${name}</strong>!<br>
