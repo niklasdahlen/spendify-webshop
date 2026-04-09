@@ -26,6 +26,8 @@
         <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
           <li class="nav-item"><a id="products-link" class="nav-link" href="#products">Products</a></li>
           <li class="nav-item">
+            <a id="history-toggle" class="nav-link" href="#">Orders</a>
+          </li>
             <a id="cart-toggle" class="nav-link cart-nav-link" href="#">
               Cart (<span id="cart-count">0</span>)
             </a>
@@ -49,6 +51,18 @@
       </div>
       <button id="cartCheckout" class="btn-submit w-100">Checkout</button>
       <button id="cartEmpty" class="btn-empty w-100">Empty cart</button>
+    </div>
+  </aside>
+
+  <div id="historyOverlay" class="cart-overlay"></div>
+  <aside id="historySidebar" class="cart-sidebar cart-sidebar--left">
+    <div class="cart-sidebar-header">
+      <h2 class="section-title">Order History</h2>
+      <button id="historyClose" class="cart-close">&times;</button>
+    </div>
+    <div id="historyItems" class="cart-items"></div>
+    <div id="historyFooter" class="cart-footer d-none">
+      <button id="historyClear" class="btn-empty w-100">Clear history</button>
     </div>
   </aside>
 
