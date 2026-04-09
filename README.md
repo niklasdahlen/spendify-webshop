@@ -1,4 +1,4 @@
-# 🛍️ Webbutik – Frontend Projekt (G-nivå)  
+# 🛍️ Webbutik – Frontend Projekt (G-nivå) samt enskild (VG-nivå) 
   
 Detta projekt är en webbapplikation som utvecklats som en del av kursen Frontend.    
 Applikationen hämtar produkter från Fake Store API och visar dem dynamiskt i en responsiv layout.  
@@ -15,7 +15,9 @@ Fokus i projektet har varit att arbeta med API-anrop, DOM-manipulation, responsi
 - Visa produkter från API    
 - Responsiv design    
 - Beställningsformulär    
-- Formulärvalidering    
+- Formulärvalidering
+- Kundvagn
+- Orderhistorik    
   
 ---  
   
@@ -24,17 +26,28 @@ Fokus i projektet har varit att arbeta med API-anrop, DOM-manipulation, responsi
 - Hämta data från API    
 - Responsiv layout    
 - Beställning av en produkt    
-- Validering av alla fält    
+- Validering av alla fält i order formuläret   
 - Publicering via GitHub Pages    
   
 ---  
+
+## 📋 Krav (VG-nivå enskild)
+
+- Lägga till produkter i varukorgen.
+- Ändra antal produkter (t.ex. öka/minska med knappar)
+- Ta bort en produkt.
+- Ta bort alla produkter.
+- Visa summa per produkt.
+- Visa totalsumma för alla produkter som ligger i varukorgen.
+
+---
   
 ## 🛠️ Tech Stack  
   
 | Del | Teknologi |  
 |-----|----------|  
 | Frontend | HTML, CSS, JavaScript |  
-| API | Fake Store API |  
+| API | DummyJSON |  
 | Styling | Bootstrap |  
 | Version control | Git + GitHub |  
   
@@ -43,6 +56,6 @@ Fokus i projektet har varit att arbeta med API-anrop, DOM-manipulation, responsi
 ## 👥 Authors  
   
 - Valeria Kostova – https://github.com/valeriakostova-source    
-- **Niklas Dahlen** – https://github.com/niklasdahlen  
+- Niklas Dahlström – https://github.com/niklasdahlen  
   
 
